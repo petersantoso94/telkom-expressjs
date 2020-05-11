@@ -1,16 +1,20 @@
-const {Router} = require('express');
+const {
+  Router
+} = require('express');
 const bcrypt = require('bcrypt');
 
 const User = require('../persistence/users');
 const Session = require('../persistence/sessions');
 
 const sessionMiddleware = require('../middleware/session-middleware');
-
 const router = new Router();
 
 router.post('/', async (req, res) => {
   try {
-    const {email, password} = req.body;
+    const {
+      email,
+      password
+    } = req.body;
     const user = await User.find(email);
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(403).json({});
@@ -28,7 +32,9 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', sessionMiddleware, (req, res) => {
-  res.json({userId: req.userId});
+  res.json({
+    userId: req.userId
+  });
 });
 
 router.delete('/', async (req, res) => {

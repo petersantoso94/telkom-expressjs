@@ -54,10 +54,8 @@ module.exports.up = async function (next) {
   `);
 
   await client.query(`
-  CREATE INDEX inventory_movement_ID on inventory_movement (ID);
-  `);
-  await client.query(`
   comment on column inventory.Status is '0->shipin,1->return, 2->shipout, 3->warehouse, 4-> Consignment';
+  comment on column inventory.Type is '4->SIM4G, 1->SIM 2->e-Voucher, 3->p-Voucher';
   comment on column inventory_movement.Status is '0->shipin,1->return, 2->shipout, 3->warehouse, 4-> Consignment';
   `);
 
@@ -69,8 +67,9 @@ module.exports.down = async function (next) {
   const client = await db.connect();
 
   await client.query(`
-  DROP TABLE inventory;
+  DROP INDEX inventory_movement_ID;
   DROP TABLE inventory_movement;
+  DROP TABLE inventory;
   `);
 
   await client.release(true);

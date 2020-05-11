@@ -29,6 +29,7 @@ module.exports.down = async function (next) {
   const client = await db.connect();
 
   await client.query(`
+  DROP INDEX ivr_unique_idx;
   DROP TABLE ivr;
   `);
 

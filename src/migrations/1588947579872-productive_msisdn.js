@@ -34,6 +34,7 @@ module.exports.down = async function (next) {
   const client = await db.connect();
 
   await client.query(`
+  DROP INDEX productive_msisdn_unique_idx;
   DROP TABLE productive_msisdn;
   `);
 
