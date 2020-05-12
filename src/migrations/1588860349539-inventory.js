@@ -27,14 +27,14 @@ module.exports.up = async function (next) {
     Remark_Inv text,
     dtRecord timestamp NOT NULL default current_timestamp,
     dtModified timestamp NOT NULL default current_timestamp,
-    user_Record smallint NOT NULL,
-    user_Update smallint DEFAULT NULL
+    user_Record uuid NOT NULL,
+    user_Update uuid DEFAULT NULL
   )
   `);
 
   await client.query(`
   CREATE TABLE IF NOT EXISTS inventory_movement (
-    ID SERIAL NOT NULL PRIMARY KEY,
+    ID uuid NOT NULL PRIMARY KEY,
     Serial_Number varchar (256) NOT NULL,
     FOREIGN KEY (Serial_Number) REFERENCES inventory (Serial_Number),
     Sub_Agent varchar (256) DEFAULT NULL,
@@ -48,8 +48,8 @@ module.exports.up = async function (next) {
     Remark text,
     dtRecord timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     dtModified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    user_Record smallint NOT NULL,
-    user_Update smallint NOT NULL
+    user_Record uuid NOT NULL,
+    user_Update uuid NOT NULL
   )
   `);
 
@@ -67,7 +67,6 @@ module.exports.down = async function (next) {
   const client = await db.connect();
 
   await client.query(`
-  DROP INDEX inventory_movement_ID;
   DROP TABLE inventory_movement;
   DROP TABLE inventory;
   `);

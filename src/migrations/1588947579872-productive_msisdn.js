@@ -18,7 +18,9 @@ module.exports.up = async function (next) {
     Year varchar (254) NOT NULL,
     unique_idx varchar (254) NOT NULL unique,
     dtModified timestamp NOT NULL default current_timestamp,
-    dtRecord timestamp NOT NULL default current_timestamp
+    dtRecord timestamp NOT NULL default current_timestamp,
+    user_Record uuid NOT NULL,
+    user_Update uuid NOT NULL
   )
   `);
 
@@ -34,7 +36,6 @@ module.exports.down = async function (next) {
   const client = await db.connect();
 
   await client.query(`
-  DROP INDEX productive_msisdn_unique_idx;
   DROP TABLE productive_msisdn;
   `);
 

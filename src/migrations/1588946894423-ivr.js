@@ -12,8 +12,8 @@ module.exports.up = async function (next) {
     dtRecord timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     dtModified timestamp NOT NULL default current_timestamp,
     Remark text NOT NULL,
-    user_Record smallint NOT NULL,
-    user_Update smallint NOT NULL
+    user_Record uuid NOT NULL,
+    user_Update uuid NOT NULL
   )
   `);
 
@@ -29,7 +29,6 @@ module.exports.down = async function (next) {
   const client = await db.connect();
 
   await client.query(`
-  DROP INDEX ivr_unique_idx;
   DROP TABLE ivr;
   `);
 
