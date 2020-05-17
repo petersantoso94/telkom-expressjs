@@ -4,10 +4,10 @@ const {
 } = require('uuid');
 
 module.exports = {
-  async shipin(inventory_movements, user_id) {
+  async create(inventory_movements, user_id, status) {
     const id = uuidv4();
     let invQueryString = "VALUES ";
-    invQueryString += inventory_movements.map(inv => `('${id}','${inv.Serial_Number}', '${inv.Price}', 0, 'true', '${inv.Warehouse}', '${inv.Form_Number}', '${inv.Fabiao_Number}', '${new Date().toISOString().slice(0, 10)}', '${inv.Remark}', '${user_id}', '${user_id}')`).join(', ');
+    invQueryString += inventory_movements.map(inv => `('${id}','${inv.Serial_Number}', '${inv.Price}', ${status}, 'true', '${inv.Warehouse}', '${inv.Form_Number}', '${inv.Fabiao_Number}', '${new Date().toISOString().slice(0, 10)}', '${inv.Remark}', '${user_id}', '${user_id}')`).join(', ');
 
     await db.query(`INSERT INTO inventory_movement (ID, Serial_Number, Price, Status, Deleted, Warehouse, Form_Number, Fabiao_Number, Date, Remark, user_Record, user_Update) ${invQueryString};`);
   }
