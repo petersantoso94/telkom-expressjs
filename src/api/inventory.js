@@ -132,6 +132,29 @@ router.post('/shipout', sessionMiddleware, (req, res) => {
   }
 });
 
+router.post('/warehousemovement', sessionMiddleware, (req, res) => {
+  try {
+    if (!Array.isArray(req.body)) {
+      res.status(400).json({
+        message: 'Need array of objects'
+      });
+      return;
+    }
+    if (req.body.length === 0) {
+      res.status(400).json({
+        message: 'Empty array'
+      });
+      return;
+    }
+    MoveInventory(req, res, 'Warehouse', (stat) => stat.status == Status.Shipin || stat.status == Status.WarehouseMovement || stat.status == Status.Return, Status.WarehouseMovement)
+  } catch (error) {
+    console.error(
+      `POST warehouse movement inventories >> ${error.stack})`
+    );
+    res.status(500).json();
+  }
+});
+
 const MoveInventory = (req, res, status_string, required_status_condition, status) => {
   let inv_move = [];
   let list_serial_number = [];
