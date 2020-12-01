@@ -18,6 +18,8 @@ services:
 
   postgres:
     image: postgres:10.4
+    volumes:
+      - dbdata:/var/lib/postgresql
     ports:
       - "35432:5432"
     environment:
@@ -30,3 +32,6 @@ services:
     restart: always
     ports:
       - 8282:8080
+
+volumes:
+  dbdata:

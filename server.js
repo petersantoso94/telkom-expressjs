@@ -3,15 +3,16 @@ const express = require('express');
 const morgan = require('morgan');
 const clientSession = require('client-sessions');
 const helmet = require('helmet');
+var cors = require('cors')
 
 const {SESSION_SECRET} = require('./config');
 
 const app = express();
+app.use(cors())
 const api = require('./src/api');
 
 app.get('/', (req, res) => res.sendStatus(200));
 app.get('/health', (req, res) => res.sendStatus(200));
-
 app.use(morgan('short'));
 app.use(express.json());
 app.use(
