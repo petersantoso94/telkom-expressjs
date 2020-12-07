@@ -143,6 +143,108 @@
           }
         }
       }
+    },
+    "/inventory/return": {
+      "post": {
+        "summary": "Return inventory",
+        "description": "Return inventory",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Return inventory request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/CommonInventoryRequest" }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "401": {
+            "description": "Unautorized request"
+          },
+          "400": {
+            "description": "Invalid request options",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/inventory/shipout": {
+      "post": {
+        "summary": "Shipout inventory",
+        "description": "Shipout inventory",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Shipout inventory request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/CommonInventoryRequest" }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "401": {
+            "description": "Unautorized request"
+          },
+          "400": {
+            "description": "Invalid request options",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/inventory/warehousemovement": {
+      "post": {
+        "summary": "Inventory Warehouse movement",
+        "description": "Inventory Warehouse movement",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Inventory Warehouse movement request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/CommonInventoryRequest" }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "401": {
+            "description": "Unautorized request"
+          },
+          "400": {
+            "description": "Invalid request options",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -199,6 +301,29 @@
           "type": "string"
         },
         "Voucher_Value": {
+          "type": "string"
+        },
+        "Remark_Inv": {
+          "type": "string"
+        },
+        "Fabiao_Number": {
+          "type": "string"
+        },
+        "Form_Number": {
+          "type": "string"
+        }
+      }
+    },
+    "CommonInventoryRequest": {
+      "type": "object",
+      "properties": {
+        "Serial_Number": {
+          "type": "string"
+        },
+        "Price": {
+          "type": "string"
+        },
+        "Warehouse": {
           "type": "string"
         },
         "Remark_Inv": {
