@@ -37,10 +37,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/createUserResponse"
-              }
+              "$ref": "#/definitions/createUserResponse"
             }
           },
           "400": {
@@ -53,6 +50,23 @@
       }
     },
     "/sessions": {
+      "get": {
+        "summary": "Get logged in user",
+        "description": "Get logged in user",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/userId"
+            }
+          }
+        },
+        "500": {
+          "description": "Internal server error"
+        }
+      },
       "post": {
         "summary": "Login user",
         "description": "Login user",
@@ -80,6 +94,54 @@
         "500": {
           "description": "Internal server error"
         }
+      },
+      "delete": {
+        "summary": "Logout user",
+        "description": "Logout user",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "500": {
+          "description": "Internal server error"
+        }
+      }
+    },
+    "/inventory": {
+      "post": {
+        "summary": "Shipin inventory",
+        "description": "Shipin inventory",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "shipin inventory request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/shipinInventoryRequest" }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "401": {
+            "description": "Unautorized request"
+          },
+          "400": {
+            "description": "Invalid request options",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
       }
     }
   },
@@ -95,6 +157,9 @@
         }
       }
     },
+    "userId": {
+      "type": "string"
+    },
     "createUserResponse": {
       "type": "object",
       "properties": {
@@ -102,6 +167,47 @@
           "type": "integer"
         },
         "email": {
+          "type": "string"
+        }
+      }
+    },
+    "shipinInventoryRequest": {
+      "type": "object",
+      "properties": {
+        "Serial_Number": {
+          "type": "string"
+        },
+        "Price": {
+          "type": "string"
+        },
+        "Missing": {
+          "type": "boolean"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "Warehouse": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "MSISDN": {
+          "type": "string"
+        },
+        "Provider": {
+          "type": "string"
+        },
+        "Voucher_Value": {
+          "type": "string"
+        },
+        "Remark_Inv": {
+          "type": "string"
+        },
+        "Fabiao_Number": {
+          "type": "string"
+        },
+        "Form_Number": {
           "type": "string"
         }
       }
