@@ -10,6 +10,9 @@ const {SESSION_SECRET} = require('./config');
 const app = express();
 app.use(cors())
 const api = require('./src/api');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res) => res.sendStatus(200));
 app.get('/health', (req, res) => res.sendStatus(200));

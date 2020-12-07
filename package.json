@@ -29,6 +29,8 @@
     "morgan": "^1.10.0",
     "pg": "^8.5.1",
     "sql-template-strings": "^2.2.2",
+    "swagger-jsdoc": "^6.0.0-rc.3",
+    "swagger-ui-express": "^4.1.5",
     "uuid": "^7.0.3"
   },
   "devDependencies": {
