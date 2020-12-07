@@ -51,6 +51,36 @@
           }
         }
       }
+    },
+    "/sessions": {
+      "post": {
+        "summary": "Login user",
+        "description": "Login user",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          }
+        },
+        "403": {
+          "description": "Invalid status value"
+        },
+        "500": {
+          "description": "Internal server error"
+        }
+      }
     }
   },
   "definitions": {
