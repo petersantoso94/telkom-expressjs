@@ -13,7 +13,6 @@
     }
   },
   "schemes": ["http"],
-  "host": "localhost:3000",
   "basePath": "/api",
   "paths": {
     "/users": {
