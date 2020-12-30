@@ -10,4 +10,6 @@ tasks:
   - command: |
         pg_start
         psql postgres -c "CREATE USER postgres SUPERUSER;" -c "CREATE DATABASE db WITH OWNER postgres;"
-        yarn
+        npm install
+        npm run migrate up
+        npm start
